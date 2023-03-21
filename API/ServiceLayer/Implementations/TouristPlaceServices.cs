@@ -1,6 +1,7 @@
 ﻿using DomainLayer;
 using RepositoryLayer;
 using ServiceLayer.Interfaces;
+using System.Linq;
 
 namespace ServiceLayer.Implementations
 {
@@ -38,7 +39,7 @@ namespace ServiceLayer.Implementations
 
         public async Task<bool> IsExistsAsync(string name, int id = -1)
         {
-            var result = _touristPlaceRepository.GeneralSearch((touristPlace) => touristPlace.Name == name && touristPlace.Id != id);
+            var result = await _touristPlaceRepository.GeneralSearchAsync((touristPlace) => touristPlace.Name == name && touristPlace.Id != id).Result.ToListAsync();
             if (result.Count > 0)
             {
                 return true;
@@ -46,10 +47,10 @@ namespace ServiceLayer.Implementations
             return false;
         }
 
-        public IList<TouristPlace> TouristPlaceGeneralSearch(string searchedText)
+        public async Task<IAsyncEnumerable<TouristPlace>> TouristPlaceGeneralSearchAsync(string searchedText)
         {
-            var result = _touristPlaceRepository.GeneralSearch((touristPlace) => touristPlace.Name.Contains(searchedText));
-            return result.ToList();
+            var result = await _touristPlaceRepository.GeneralSearchAsync((touristPlace) => touristPlace.Name.Contains(searchedText));
+            return result;
         }
     }
 }

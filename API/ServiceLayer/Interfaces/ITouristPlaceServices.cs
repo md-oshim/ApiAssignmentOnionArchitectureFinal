@@ -5,7 +5,7 @@ namespace ServiceLayer.Interfaces
     public interface ITouristPlaceServices
     {
         Task<IAsyncEnumerable<TouristPlace>> GetAllTouristPlacesAsync();
-        IList<TouristPlace> TouristPlaceGeneralSearch(string searchedText);
+        Task<IAsyncEnumerable<TouristPlace>> TouristPlaceGeneralSearchAsync(string searchedText);
         Task<TouristPlace> GetTouristPlaceByIdAsync(int id);
         Task InsertTouristPlaceAsync(TouristPlace touristPlace);
         Task UpdateTouristPlaceAsync(TouristPlace touristPlace);

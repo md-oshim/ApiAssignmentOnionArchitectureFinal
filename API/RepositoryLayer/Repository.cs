@@ -28,10 +28,9 @@ namespace RepositoryLayer
             }
         }
 
-        public IList<T> GeneralSearch(Expression<Func<T, bool>> predicate)
+        public async Task<IAsyncEnumerable<T>> GeneralSearchAsync(Expression<Func<T, bool>> predicate)
         {
-            var result_t = _entities.Where(predicate);
-            var result = result_t.ToList();
+            var result = _entities.Where(predicate).AsAsyncEnumerable();
             return result;
         }
 
@@ -69,7 +68,6 @@ namespace RepositoryLayer
         {
             entity.UpdatedAt = DateTime.Now;
             _entities.Update(entity);
-            _context.SaveChanges(); 
             await SaveChangesAsync();
         }
     }

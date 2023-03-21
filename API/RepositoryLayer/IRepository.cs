@@ -10,7 +10,7 @@ namespace RepositoryLayer
         Task InsertOneAsync(T entity);
         Task UpdateOneAsync(T entity);
         Task DeleteOneAsync(int id);
-        IList<T> GeneralSearch(Expression<Func<T, bool>> predicate);
+        Task<IAsyncEnumerable<T>> GeneralSearchAsync(Expression<Func<T, bool>> predicate);
         Task SaveChangesAsync();
 
     }
