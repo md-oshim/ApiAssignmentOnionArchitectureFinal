@@ -199,7 +199,7 @@ function dataValidation() {
     touristPlace.rating = rating;
 
     let type = typeInput.val().trim();
-    if (type == '' && id == '0') {
+    if (type == '') {
         createInputErrorMessage('type', 'Please enter the Tourist Place Type');
         error = true;
     }
