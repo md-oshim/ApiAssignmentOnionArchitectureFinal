@@ -24,8 +24,7 @@ namespace TouristPlaceWebApi.Controllers
             if(searchedText.IsNullOrEmpty() == false)
             {
                 searchedText = searchedText.Trim();
-                var result = await _touristPlaceServices.TouristPlaceGeneralSearchAsync(searchedText);
-                allTouristPlaces = (List<TouristPlace>) result;
+                allTouristPlaces = await _touristPlaceServices.TouristPlaceGeneralSearchAsync(searchedText).Result.ToListAsync();
             }
             else
             {
